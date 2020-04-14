@@ -22,27 +22,21 @@ struct TreeNode {
 
 
 class Solution {
-
 public:
     int sumOfLeftLeaves(TreeNode* root) {
-
         if(!root) return 0;
 
-        return dfs(root, false);
+        return dfs(root,false);
     }
-
 private:
-    int dfs(TreeNode* node, bool isLeft){
-
-        if(!node->left && !node->right){
-            if(isLeft) return node->val;
+    int dfs(TreeNode* root,bool left)
+    {   if(root==NULL)
             return 0;
-        }
 
-        int res = 0;
-        if(node->left) res += dfs(node->left, true);
-        if(node->right) res += dfs(node->right, false);
-        return res;
+        if(left==true&&root->left==NULL&&root->right==NULL)
+            return root->val;
+
+        return dfs(root->left,true)+dfs(root->right,false);
     }
 };
 
